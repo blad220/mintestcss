@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--        <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0,  user-scalable=no">
+
+
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <title>Hello</title>
+</head>
+
+<body>
+    <!--    <div class="shake-back"></div>-->
+    <!--    Fo IE+ support-->
+    <div class='wrap'>
+        <div class='outer'>
+            <!--    Fo IE+ support-->
+
+
+            <div class="all-flex">
+                <div class="hover-efect">
+                    <p>Menu</p>
+                </div>
+                <div class="header additional">
+                    <h1>MINIMAL DESIGN</h1>
+
+                </div>
+                <div class="main left">
+                    <div class="conteiner">
+                        <div class="conteiner-image"></div>
+                        <div class="conteiner-block-icon">
+                            <div class="block-icon"></div>
+                            <div class="block-icon"></div>
+                            <div class="block-icon"></div>
+                            <div class="block-icon"></div>
+                        </div>
+                    </div>
+                    <div class="conteiner-name">Contacts</div>
+                </div>
+                <div class="main right">
+                    <div class="conteiner">
+                        <!--                <div class="conteiner-content">-->
+                        <ul>
+                            <li>List 1. Special Aditional</li>
+                            <li>List 2. Special Aditional</li>
+                            <li>List 3. Special Aditional</li>
+                            <li>List 4. Special Aditional</li>
+                        </ul>
+                        <!--
+                    <p>List 1. Special Aditional</p>
+                    <p>List 2. Special Aditional</p>
+                    <p>List 3. Special Aditional</p>
+                    <p>List 4. Special Aditional</p>
+-->
+                        <!--                </div>-->
+                    </div>
+                    <div class="conteiner-name">Projects</div>
+                </div>
+                <div class="main center">
+                    <div class="conteiner"></div>
+                    <div class="conteiner-name">Main</div>
+                </div>
+            </div>
+            <div class="flip-card-back">
+                <h1>John Doe</h1>
+                <p>Architect & Engineer</p>
+            </div>
+            <!--
+            <div class="c-left content additional" style="text-align: left;">
+                <p>List</p>
+                <p>List</p>
+                <p>List</p>
+                <p>List</p><p>List</p>
+<p>List</p>
+</div>
+-->
+            <div class="c-right content additional" style="text-align: center;">
+                <div class="img"></div>
+                <h1>John Doe Top</h1>
+                <p>Architect & Engineer</p>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        //        if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+        //            console.log('this is a touch device');
+        //        } else {
+        //            console.log('this is not a touch device');
+        //            document.body.classList.add('no-touch');
+        //        }
+        //        
+
+        //        console.log(getComputedStyle(document.documentElement).getPropertyValue('--i'));
+        //        let root = document.documentElement;
+        //        root.style..setProperty('--my-variable-name', 'pink');
+        //        
+        var backgroundImg = "images/10s.jpg";
+
+        //#5714F9
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        var randomColor = "#" + ((1 << 24) * Math.random() | 0).toString(16);
+        //        document.querySelector(".shake-back").style.setProperty('--main-bg-color', getRandomColor());
+
+        //var coofTop = window.getComputedStyle(document.querySelector(".main.center"),":hover").getPropertyValue("margin-top");
+        //left/right.top - center.top-coofSkew
+        //skew:10 -> coofSkew:17
+        //skew:20 -> coofSkew:36
+        //-> skew 1 = 1.8 coofSkew = 1.8 l/r.Top
+
+        //var coofTop = 36 - 160 - 18;
+        var coofTop = -75;
+
+        var coofLeft = -260;
+
+
+        var curMainClass = "none";
+
+        document.querySelector(".main.left").style.backgroundPositionX = coofLeft + "px";
+        document.querySelector(".main.center").style.backgroundPositionX = coofLeft + -200 + "px";
+        document.querySelector(".main.right").style.backgroundPositionX = coofLeft + -400 + "px";
+
+        document.querySelector(".main.left").style.backgroundPositionY = "0px";
+        document.querySelector(".main.center").style.backgroundPositionY = "0px";
+        document.querySelector(".main.right").style.backgroundPositionY = "0px";
+
+        //--Desktop events
+        document.querySelector(".all-flex").addEventListener("mouseover", allFlexMouseOver, false);
+
+        document.querySelector(".all-flex").addEventListener("mouseleave", allFlexMouseOut, false);
+
+        document.querySelector(".c-right").addEventListener("mouseover", cRightMouseOver, false);
+        document.querySelector(".outer").addEventListener("mouseleave", cRightMouseOut, false);
+
+        function toIntBackground(value, which) {
+            if (which == "width") {
+                return parseFloat(value.slice(0, value.search(" ")));
+            }
+            if (which == "height") {
+                return parseFloat(value.slice(value.search(" "), value.length));
+            }
+            return "none";
+        }
+
+        function allFlexMouseOut(event) {
+
+            document.querySelector(".main.center").style.backgroundPositionY = "0px";
+
+        }
+
+        function allFlexMouseOver(event) {
+            //  var bounds = event.target.getBoundingClientRect();
+            var bounds = this.getBoundingClientRect();
+
+            var x = event.clientX - bounds.left;
+            var y = event.clientY - bounds.top;
+
+            var bounds2 = this.querySelector(".conteiner").getBoundingClientRect();
+            var bounds3 = this.querySelector(".main").getBoundingClientRect();
+
+            document.querySelector(".main.left").style.backgroundPositionY = 0 + "px";
+            document.querySelector(".main.center").style.backgroundPositionY = coofTop + "px";
+            document.querySelector(".main.right").style.backgroundPositionY = 0 + "px";
+
+        }
+
+        //--Flip animation c-right block start--
+        function cRightMouseOver(event) {
+            document.querySelector(".outer").classList.add("flip");
+        }
+
+        function cRightMouseOut(event) {
+            document.querySelector(".outer").classList.remove("flip");
+        }
+        //--Flip animation c-right block end--
+
+        var elements = document.querySelectorAll('.main');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].addEventListener("mouseover", OverMainShowConteiner, false);
+            elements[i].addEventListener("mouseout", OutMainShowConteiner, false);
+            //    elements[i].addEventListener("mousemove",relativeCoords,false);
+        }
+
+        function OverMainShowConteiner(event) {
+            curMainClass = event.currentTarget.className;
+            //    console.log(event.currentTarget.getElementsByClassName("conteiner")[0]);
+
+            var curEvent = event.currentTarget.getElementsByClassName("conteiner")[0];
+            event.currentTarget.getElementsByClassName("conteiner")[0].style.marginLeft = 15 + "px";
+            var elem = document.querySelectorAll(".main .conteiner");
+
+            var boundsCont = this.getBoundingClientRect();
+            //    var boundsOut = document.querySelectorAll(".main .conteiner").getBoundingClientRect();
+            var x = event.clientX;
+            var y = event.clientY;
+            //    console.log({x: x, y: y, l: bounds.left, t: bounds.top});
+            for (var i = 0; i < elem.length; i++) {
+                if (elem[i] != curEvent) {
+                    elem[i].style.marginLeft = curEvent.parentElement.getBoundingClientRect().left - elem[i].parentElement.getBoundingClientRect().left + 15 + "px";
+
+                    //            console.log(curEvent.getBoundingClientRect().left-elem[i].getBoundingClientRect().left);
+                }
+
+            }
+            var elementsLi = document.querySelectorAll('.main .conteiner ul li');
+            //            console.log(getComputedStyle(document.documentElement).getPropertyValue('--i'));
+
+            if ((curEvent.querySelector('ul') == null)) {
+                for (var i = 0; i < elementsLi.length; i++) {
+                    elementsLi[i].style.marginLeft = -(20 + i * 50) + "%";
+                }
+            } else {
+                for (var i = 0; i < elementsLi.length; i++) {
+                    elementsLi[i].style.marginLeft = 0 + "%";
+                }
+            }
+
+
+            //        GlobalX:
+            //        L:600px:hover -> C: 600px; R: 600px;
+            //        C:800px:hover -> L: 800px; R: 800px;
+            //        R:1000px:hover -> L: 1000px; C: 1000px;
+            //        Margin:
+            //        L:hover -> C: -200px; R: -400px;
+            //        C:hover -> L: -200px; R: +200px;
+            //        R:hover -> L: +400px; C: -200px;
+
+
+        }
+
+        function OutMainShowConteiner(event) {
+
+            //    curMainClass = "none";
+            //    var bounds = this.getBoundingClientRect();
+            //    var bounds2 = this.querySelector(".conteiner").getBoundingClientRect();
+            //    var x = event.clientX - bounds.left;
+            //    var mouseCenterPos = x - bounds2.width/2;
+            //    
+            //    this.querySelector(".left .conteiner").style.marginLeft =  + 0;
+            //    this.querySelector(".center .conteiner").style.marginLeft =  - 250;
+            //    this.querySelector(".right .conteiner").style.marginLeft =  - 500;
+
+
+            var elem = document.querySelectorAll(".main .conteiner");
+
+            //    console.log({x: x, y: y, l: bounds.left, t: bounds.top});
+            for (var i = 0; i < elem.length; i++) {
+
+                elem[i].style.marginLeft = 15 + "px";
+
+                //            console.log(curEvent.getBoundingClientRect().left-elem[i].getBoundingClientRect().left);
+
+
+            }
+
+        }
+
+        function showContClick(event) {
+            document.querySelector(".left").style.marginTop = 36;
+            document.querySelector(".center").style.marginTop = 36;
+            document.querySelector(".left").style.marginRight = 0;
+            document.querySelector(".main.center").style.backgroundPositionY = "0px";
+            document.querySelector(".all-flex").removeEventListener("mouseover", relativeCoordsMouseMove, false);
+        }
+        //Mobile events
+        document.querySelector("body").addEventListener("touchstart", lock, false);
+        document.querySelector("body").addEventListener('touchmove', touchmove, false);
+        document.querySelector("body").addEventListener('touchend', move, false);
+
+        document.querySelector("body").addEventListener("mousedown", lock, false);
+        document.querySelector("body").addEventListener("mouseup", move, false);
+
+        let iTouch = 0,
+            x0 = null,
+            N = 3;
+
+        function unify(e) {
+            return e.changedTouches ? e.changedTouches[0] : e
+        };
+
+        function lock(e) {
+            x0 = unify(e).clientX
+        };
+
+        function move(e) {
+            let root = document.documentElement;
+            if (x0 || x0 === 0) {
+                let dx = unify(e).clientX - x0,
+                    s = Math.sign(dx);
+
+                if ((iTouch > 0 || s < 0) && (iTouch < N - 1 || s > 0))
+                    root.style.setProperty('--i', iTouch -= s);
+                x0 = null
+            }
+            console.log("up");
+        };
+
+        //        root.style..setProperty('--my-variable-name', 'pink');
+        function touchmove(e) {
+            e.preventDefault();
+        }
+    </script>
+</body></html>
